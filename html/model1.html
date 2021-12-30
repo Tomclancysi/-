@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>人口经济可视化</title>
+    <link href="./css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!------ commn-js files ----->
+    <script src="./js/jquery.min.js"> </script>
+    <!------ commn-js files ----->
+    <!----- theme-style ----->
+    <link href="./css/style.css" rel='stylesheet' type='text/css' />
+    <!----- theme-style ----->
+    <!----- webfonts ----->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+    <!----- webfonts ----->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 添加：全国部分 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E8d5c530f017e26ea4e9b03c9ca3899e"></script>
+    <link rel="stylesheet"href="./css/chart.css"/>
+    <script src="./js/viewer.js"></script>
+    <script type="text/javascript">
+    
+    function MM_callJS(jsStr) { //v2.0
+      return eval(jsStr)
+    }
+    </script>
+</head>
+
+<body>
+    <!---header--->
+    <div class="header">
+    <!---container--->
+        <div class="container">
+        <div class="top-header">
+            <div class="logo">
+                <a href="../index.html"><img src="./images/logo.png"/></a>
+            </div>
+            <div class="menu">
+                <ul class="nav" id="nav">
+                    <li><a href="../index.html">主页</a></li>
+                    <li ><a href="model0.html" class="scroll">全国GDP变化</a></li>
+                    <li class="active"><a href="model1.html" class="scroll">东三省GDP排名变化</a></li>
+                    <li><a href="model2_0.html" class="scroll">全国各省人口变化</a></li>
+                    <li ><a href="model3.html" class="scroll">东三省人口迁出</a></li>
+                    <li><a href="about.html" class="scroll">关于</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        </div>
+    <!---container--->
+    </div>
+<!---header--->
+
+<!-- 以下开始添加功能代码 -->
+<div id="Layer1" style="position:absolute;z-index:1 border:10px;solid #ccc;padding:10px;">
+    <div id="allmap" style="position:absolute; width:2000px; height:850px; z-index:1;  left: 1px; top: 1px;"></div>  
+    <div id="Layer2" style="position:absolute; width:200px; height:150px; z-index:1;  left: 40px; top: 1px;"onfocus="MM_callJS('hello')" >
+        <div id="chartType" style="background:#FFFACD;">
+            <p><br>
+            <h4>请选择省份</h4>
+            </p>
+            <p>
+                <select name="x" id="NumProvice" onchange="checked()" selected=0 style="width:100px">
+                    <option value="0">辽宁</option>
+                    <option value="1">吉林</option>
+                    <option value="2">黑龙江</option>            
+                </select>
+            </p><br>
+            <input type="radio" name="type" value="browser" checked="checked">   GDP排名变化<br>
+            
+            <div id="sidebar">
+                <div id="sidebarBox">
+                    <div id="sidebarScrollView">
+                        <div id="sidebarContentView">
+                        <textarea readonly id="sum" style= "background:transparent;border-style:none;resize:none;overflow-y:hidden;color:#F00;height:660px;width:170px;">
+                        </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="chartArea">&nbsp;</div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+   //百度地图API功能
+    var map = new BMap.Map("allmap");
+    var map = new BMap.Map("allmap",{minZoom:3,maxZoom:6}); // 创建Map实例,设置地图允许的最小/大级别
+    var provice=new Array("辽宁","吉林省","黑龙江");
+    var rate=new Array("25","26","28");
+    var color=new Array("#CD3333","#CD8500","#6495ED");
+    var GDP = new Array("25115","12311","13699");
+    map.centerAndZoom(new BMap.Point(118.780949,32.05846), 5);     // 初始地图的中心点和显示大小(瞬间)
+
+    function InfoPoint(){
+    //弹跳动画+信息窗口
+        var point = new BMap.Point(lo[NumProvice.value],la[NumProvice.value]);      // 获取每个省省会坐标 
+        var marker = new BMap.Marker(point);  // 创建标注，表示地图上的点，可自定义标注的图标
+        map.addOverlay(marker);               // 将标注添加到地图中
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画      BMAP_ANIMATION_DROP：下坠
+        //纯信息窗口
+        map.centerAndZoom(point, 15);           // 地图的中心点和显示大小
+        var opts = { 
+          width : 60,     // 信息窗口宽度
+          height: 30,     // 信息窗口高度
+          title : "2020年各省国民生产总值" , // 信息窗口标题
+          enableMessage:false,//不设置允许信息窗发送短息
+          message:""
+        }
+        
+        var infoWindow = new BMap.InfoWindow(provice[NumProvice.value]+":"+GDP[NumProvice.value]+"亿元", opts);  // 创建信息窗口对象 
+        
+        marker.addEventListener("click", function(){          
+            map.openInfoWindow(infoWindow, point); //开启信息窗口
+        });
+    }
+
+    //经纬度坐标
+    var lo=new Array("122.833298","126.218401","127.358889");
+    var la=new Array("41.115669","43.411136","46.899735");
+</script>

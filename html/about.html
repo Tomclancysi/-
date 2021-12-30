@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>团队简介</title>
+	<link href="./css/bootstrap.css" rel='stylesheet' type='text/css' /> 
+	<!------ commn-js files ----->
+	<script src="./js/jquery.min.js"> </script>
+	<!------ commn-js files ----->
+	<!----- theme-style ----->
+	<link href="./css/style.css" rel='stylesheet' type='text/css' />
+	<!----- theme-style ----->
+	
+	<!----- webfonts ----->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+	<!----- webfonts ----->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="css/style_2.css" rel="stylesheet" type="text/css" media="all" />
+	<!--nav-->
+	<script src="js/jquery.min.js"></script>
+	<!-- Add fancyBox main JS and CSS files -->
+	<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+	<link href="css/magnific-popup.css" rel="stylesheet" type="text/css">
+	<script>
+		$(document).ready(function() {                     // 表示文档结构已经加载完成（不包含图片等非文字媒体文件）
+			$('.popup-with-zoom-anim').magnificPopup({      // Magnific Popup 是一个非常优秀的弹出对话框或者灯箱效果插件
+				type: 'inline',              // 行内的类型，类比图片的模式                
+				fixedContentPos: false,
+				fixedBgPos: false,
+				overflowY: 'auto',
+				closeBtnInside: true,     // 显示关闭按钮
+				preloader: false,
+				midClick: true,
+				removalDelay: 300,
+				mainClass: 'my-mfp-zoom-in'   // String类型，要添加到根元素上的样式类。默认是空字符串。
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<!---header--->
+	<div class="header">
+	<!---container--->
+		<div class="logo">
+			<a href="../index.html"><img src="./images/logo.png"/></a>
+		</div>
+		<div class="container">
+			<div class="top-header">
+				<div class="menu">
+					<ul class="nav" id="nav">
+						<li><a href="../index.html">主页</a></li>
+						<li><a href="model0.html" class="scroll">全国GDP变化</a></li>
+						<li><a href="model1.html" class="scroll">东三省GDP排名变化</a></li>
+						<li><a href="model2_0.html" class="scroll">全国各省人口变化</a></li>
+						<li><a href="model3.html" class="scroll">东三省人口迁出</a></li>
+						<li class="active"><a href="about.html" class="scroll">关于</a></li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!---container--->
+	</div>
+	<!---header--->
+
+<!-- 以下开始添加功能代码 -->
+	<div style="position:absolute;top:150px;width:100%;">
+		<div style="top:200px;">
+			<div class="main_bg" >
+				<div class="wrap">
+					<div class="grids_1_of_3">
+						<div class="images_1_of_3">
+					<!-- 添加一个a标签，设置href属性指向一个要弹出来的一个div盒子，即"#small-dialog1"-->
+							<a class="popup-with-zoom-anim" href="#small-dialog1">
+								<img src="images/pic3.jpg" alt="" title="portfolio" /></a>   
+							<a class="popup-with-zoom-anim" href="#small-dialog1"><h3>团队简介</h3></a>
+			 					<!-- start popup -->
+			 					<!-- 以下就是要弹出来的层，注意：添加mfp-hide先进行隐藏起来 -->
+			 				<div id="small-dialog1" class="mfp-hide">
+								<div class="pop_up">
+								 	<h2>团队简介</h2>
+									<p>名称：东三省GDP以及人口变化分析</p>
+									<p>单位：华东师范大学</p>
+									<p>队长：李宁</p>
+									<p>组员：郭建聪、李欣宜、叶永旭、管增瑞、邓贵强、曹磊亮、傅暮云</p>
+					  			</div>
+							</div>
+						<!-- end popup -->	
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>   
+</body>
+</html>
+		

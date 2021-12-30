@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>人口经济可视化</title>
+	<link href="./css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<!------ commn-js files ----->
+	<script src="./js/jquery.min.js"> </script>
+	<!------ commn-js files ----->
+	<!----- theme-style ----->
+	<link href="./css/style.css" rel='stylesheet' type='text/css' />
+	<!----- theme-style ----->
+	<!----- webfonts ----->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+	<!----- webfonts ----->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"href="./css/chart.css"/>
+</head>
+
+<body>
+<!---header--->
+	<div class="header">
+	<!---container--->
+		<div class="container">
+		<div class="top-header">
+			<div class="logo">
+				<a href="../index.html"><img src="./images/logo.png"/></a>
+			</div>
+			<div class="menu">
+				<ul class="nav" id="nav">
+					<li><a href="../index.html">主页</a></li>
+					<li><a href="model0.html" class="scroll">全国GDP变化</a></li>
+					<li><a href="model1.html" class="scroll">东三省GDP排名变化</a></li>
+					<li><a href="model2_0.html" class="scroll">全国各省人口变化</a></li>
+					<li class="active"><a href="model3.html" class="scroll">东三省人口迁出</a></li>
+					<li><a href="about.html" class="scroll">关于</a></li>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		</div>
+	<!---container--->
+	</div>
+<!---header--->
+
+    <!-- 以下开始添加功能代码 -->
+    <div align="center">
+        <div id="mainMap" style="height:850px;width:100%;border:10px solid #ccc;padding:10px;"></div>
+    </div>
+</body>
+
+<script src="js/echarts-plain-map.js"></script>
+
+<script type="text/javascript">
+    // Step:3 echarts & zrender as a Global Interface by the echarts-plain.js.
+    // Step:3 echarts和zrender被echarts-plain.js写入为全局接口
+    option = {
+        backgroundColor: 'gray',
+        color: ['gold','aqua','lime'],
+        title : {
+            text: '东三省人口迁出',
+            subtext:'数据来自百度地图',
+            x:'center',
+            textStyle : {
+                color: '#fff'
+            }
+        },
+		// 提示框组件
+        tooltip : {
+            trigger: 'item',
+            formatter: function (v) {
+                return v[1].replace(':', ' > ');
+            }
+        },
+        legend: { // 图例组件 复选框?
+            orient: 'vertical',
+            x:'left',
+            data:['辽宁 迁出省份', '吉林 迁出省份', '黑龙江 迁出省份'],
+            selectedMode: 'single',
+            selected:{
+    			'辽宁 迁出省份': false,
+                '吉林 迁出省份' : false,
+                '黑龙江 迁出省份' : false
+            },
+            textStyle : {
+                color: '#fff'
+            }
+        },
+        toolbox: {
+            show : false,
+            orient : 'vertical',
+            x: 'right',
+            y: 'center',
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        dataRange: { 
+            min : 0,
+            max : 5000,
+            calculable : true,
+            color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
+            textStyle:{
+                color:'#fff'
+            }
+        },
+
+        series : [
+            {
+                name: '全国',
+                type: 'map',
+                roam: true,
+                hoverable: false,
+                mapType: 'china',
+                itemStyle:{
+                    normal:{
+                        borderColor:'rgba(100,149,237,1)',
+                        borderWidth:0.5,
+                        areaStyle:{
+                            color: '#1b1b1b'
+                        }
+                    }   
+                },
+                data:[],
+                markLine : {
+                    smooth:true,
+                    symbol: ['none', 'circle'],
+                    symbolSize : 1,
+                    itemStyle : {
+                        normal: {
+                            color:'#fff',
+                            borderWidth:1,
+                            borderColor:'rgba(30,144,255,0.5)'
+                        }
+                    },
+                    data : [],
+                },
+                geoCoord: {
+					// 23省
+					'甘肃省':[103.73, 36.03],
+					'青海省':[101.74, 36.56],
+					'四川省':[104.06, 30.67],
+					'河北省':[114.48, 38.03],
+					'云南省':[102.73, 25.04],
+					'贵州省':[106.71, 26.57],
+					'湖北省':[114.31, 30.52],
+					'河南省':[113.65, 34.76],
+					'山东省':[117, 36.65],
+					'江苏省':[118.78, 32.04],
+					'安徽省':[117.27, 31.86],
+					'浙江省':[120.19, 30.26],
+					'江西省':[115.89, 28.68],
+					'福建省':[119.3, 26.08],
+					'广东省':[113.23, 23.16],
+					'湖南省':[113, 28.21],
+					'海南省':[110.35, 20.02],
+					'辽宁省':[123.38, 41.8],
+					'吉林省':[125.35, 43.88],
+					'黑龙江省':[126.63, 45.75],
+					'山西省':[112.53, 37.87],
+					'陕西省':[108.95, 34.27],
+					'台湾省':[121.30, 25.03],
+					// 4直辖市
+					'北京市':[116.46, 39.92],
+					'上海市':[121.48, 31.22],
+					'重庆市':[106.54, 29.59],
+					'天津市':[117.2, 39.13],
+					// 5自治区
+					'内蒙古自治区':[111.65, 40.82],
+					'广西壮族自治区':[108.33, 22.84],
+					'西藏自治区':[91.11, 29.97],
+					'宁夏回族自治区':[106.27, 38.47],
+					'新疆维吾尔自治区':[87.68, 43.77],
+					// 2特别行政区
+					'香港特别行政区':[114.17, 22.28],
+					'澳门特别行政区':[113.54, 22.19],
+                }
+            },
+            {
+                name: '辽宁 迁出省份',
+                type: 'map',
+			    //roam: true,
+                mapType: 'china',
+                data:[],
+                markLine : {
+                    smooth:true,
+                    effect : {
+                        show: true,
+                        scaleSize: 1,
+                        period: 30,
+                        color: '#fff',
+                        shadowBlur: 10
+                    },
+                    itemStyle : {
+                        normal: {
+                            borderWidth:1,
+                            lineStyle: {
+                                type: 'solid',
+                                shadowBlur: 10
+                            }
+                        }
+                    },
+                    data : [
+                        [{name:'辽宁省'}, {name:'吉林省',value:2686}],
+    					[{name:'辽宁省'}, {name:'河北省',value:2018}],
+    					[{name:'辽宁省'}, {name:'内蒙古自治区',value:1941}],
+    					[{name:'辽宁省'}, {name:'北京市',value:1633}],
+    					[{name:'辽宁省'}, {name:'黑龙江省',value:1335}],
+    					[{name:'辽宁省'}, {name:'山东省',value:1136}],
+    					[{name:'辽宁省'}, {name:'江苏省',value:575}],
+    					[{name:'辽宁省'}, {name:'天津市',value:572}],
+    					[{name:'辽宁省'}, {name:'广东省',value:476}],
+                    ]
+                },
+                markPoint : {
+                    symbol:'emptyCircle',
+                    symbolSize : function (v){
+                        return 10 + v/200
+                    },
+                    effect : {
+                        show: true,
+                        shadowBlur : 0
+                    },
+                    itemStyle:{
+                        normal:{
+                            label:{show:false}
+                        }
+                    },
+                    data : [
+                        {name:'吉林省',value:2686},
+                        {name:'河北省',value:2018},
+                        {name:'内蒙古自治区',value:1941},
+                        {name:'北京市',value:1633},
+                        {name:'黑龙江省',value:1335},
+                        {name:'山东省',value:1136},
+                        {name:'江苏省',value:575},
+                        {name:'天津市',value:572},
+                        {name:'广东省',value:476},
+                        {name:'上海市',value:387},
+                        {name:'浙江省',value:384},
+                        {name:'河南省',value:361},
+                        {name:'山西省',value:228},
+                        {name:'四川省',value:209},
+                        {name:'安徽省',value:191},
+                        {name:'陕西省',value:184},
+                        {name:'海南省',value:159},
+                        {name:'福建省',value:159},
+                        {name:'湖北省',value:127},
+                        {name:'湖南省',value:124},
+                        {name:'云南省',value:102},
+                        {name:'广西壮族自治区',value:91},
+                        {name:'重庆市',value:90},
+                        {name:'江西省',value:83},
+                        {name:'贵州省',value:68},
+                        {name:'甘肃省',value:56},
+                        {name:'新疆维吾尔自治区',value:36},
+                        {name:'宁夏回族自治区',value:22},
+                        {name:'青海省',value:14},
+                        {name:'西藏自治区',value:5},
+                    ]
+                }
+            }, // END
+            {
+                name: '吉林 迁出省份',
+                type: 'map',
+                mapType: 'china',
+                data:[],
+                markLine : {
+                    smooth:true,
+                    effect : {
+                        show: true,
+                        scaleSize: 1,
+                        period: 30,
+                        color: '#fff',
+                        shadowBlur: 10
+                    },
+                    itemStyle : {
+                        normal: {
+                            borderWidth:1,
+                            lineStyle: {
+                                type: 'solid',
+                                shadowBlur: 10
+                            }
+                        }
+                    },
+                    data : [
+                        [{name:'吉林省'},{name:'辽宁省',value:4823}],
+                        [{name:'吉林省'},{name:'黑龙江省',value:2776}],
+                        [{name:'吉林省'},{name:'内蒙古自治区',value:1532}],
+                        [{name:'吉林省'},{name:'北京市',value:1089}],
+                        [{name:'吉林省'},{name:'山东省',value:848}],
+                        [{name:'吉林省'},{name:'河北省',value:779}],
+                        [{name:'吉林省'},{name:'江苏省',value:432}],
+                        [{name:'吉林省'},{name:'广东省',value:418}],
+                        [{name:'吉林省'},{name:'天津市',value:406}],
+                    ]
+                },
+                markPoint : {
+                    symbol:'emptyCircle',
+                    symbolSize : function (v){
+                        return 10 + v/500
+                    },
+                    effect : {
+                        show: true,
+                        shadowBlur : 0
+                    },
+                    itemStyle:{
+                        normal:{
+                            label:{show:false}
+                        }
+                    },
+                    data : [
+                        {name:'辽宁省',value:4823},
+                        {name:'黑龙江省',value:2776},
+                        {name:'内蒙古自治区',value:1532},
+                        {name:'北京市',value:1089},
+                        {name:'山东省',value:848},
+                        {name:'河北省',value:779},
+                        {name:'江苏省',value:432},
+                        {name:'广东省',value:418},
+                        {name:'天津市',value:406},
+                        {name:'浙江省',value:373},
+                        {name:'上海市',value:311},
+                        {name:'河南省',value:207},
+                        {name:'海南省',value:192},
+                        {name:'四川省',value:143},
+                        {name:'安徽省',value:128},
+                        {name:'陕西省',value:123},
+                        {name:'山西省',value:120},
+                        {name:'福建省',value:118},
+                        {name:'湖南省',value:108},
+                        {name:'湖北省',value:96},
+                        {name:'云南省',value:84},
+                        {name:'广西壮族自治区',value:76},
+                        {name:'江西省',value:72},
+                        {name:'重庆市',value:66},
+                        {name:'贵州省',value:45},
+                        {name:'甘肃省',value:36},
+                        {name:'新疆维吾尔自治区',value:26},
+                        {name:'宁夏回族自治区',value:16},
+                        {name:'青海省',value:9},
+                        {name:'西藏自治区',value:3}
+                    ]
+                }
+            },
+            {
+                name: '黑龙江 迁出省份',
+                type: 'map',
+                mapType: 'china',
+                data:[],
+                markLine : {
+                    smooth:true,
+                    effect : {
+                        show: true,
+                        scaleSize: 1,
+                        period: 30,
+                        color: '#fff',
+                        shadowBlur: 10
+                    },
+                    itemStyle : {
+                        normal: {
+                            borderWidth:1,
+                            lineStyle: {
+                                type: 'solid',
+                                shadowBlur: 10
+                            }
+                        }
+                    },
+                    data : [
+                        [{name:'黑龙江省'},{name:'吉林省',value:3260}],
+                        [{name:'黑龙江省'},{name:'辽宁省',value:2717}],
+                        [{name:'黑龙江省'},{name:'内蒙古自治区',value:1588}],
+                        [{name:'黑龙江省'},{name:'北京市',value:1504}],
+                        [{name:'黑龙江省'},{name:'山东省',value:1156}],
+                        [{name:'黑龙江省'},{name:'河北省',value:924}],
+                        [{name:'黑龙江省'},{name:'广东省',value:548}],
+                        [{name:'黑龙江省'},{name:'天津市',value:520}],
+                        [{name:'黑龙江省'},{name:'江苏省',value:498}],
+                    ]
+                },
+                markPoint : {
+                    symbol:'emptyCircle',
+                    symbolSize : function (v){
+                        return 10 + v/500
+                    },
+                    effect : {
+                        show: true,
+                        shadowBlur : 0
+                    },
+                    itemStyle:{
+                        normal:{
+                            label:{show:false}
+                        }
+                    },
+                    data : [
+                        {name:'吉林省',value:3260},
+                        {name:'辽宁省',value:2717},
+                        {name:'内蒙古自治区',value:1588},
+                        {name:'北京市',value:1504},
+                        {name:'山东省',value:1156},
+                        {name:'河北省',value:924},
+                        {name:'广东省',value:548},
+                        {name:'天津市',value:520},
+                        {name:'江苏省',value:498},
+                        {name:'浙江省',value:405},
+                        {name:'上海市',value:372},
+                        {name:'海南省',value:308},
+                        {name:'河南省',value:236},
+                        {name:'四川省',value:172},
+                        {name:'安徽省',value:138},
+                        {name:'陕西省',value:136},
+                        {name:'山西省',value:134},
+                        {name:'福建省',value:125},
+                        {name:'湖南省',value:125},
+                        {name:'湖北省',value:111},
+                        {name:'云南省',value:98},
+                        {name:'广西壮族自治区',value:88},
+                        {name:'江西省',value:71},
+                        {name:'重庆市',value:70},
+                        {name:'贵州省',value:55},
+                        {name:'甘肃省',value:36},
+                        {name:'新疆维吾尔自治区',value:25},
+                        {name:'宁夏回族自治区',value:21},
+                        {name:'青海省',value:12},
+                        {name:'西藏自治区',value:3}
+                    ]
+                }
+            }
+        ]
+    };
+                    
+    // --- 地图 ---
+    var myChart2 = echarts.init(document.getElementById('mainMap'));
+    myChart2.setOption(option);
+</script>
+</html>
+		

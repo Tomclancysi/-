@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>人口经济可视化</title>
+		<link href="./html/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!------ commn-js files ----->
+		<script src="./html/js/jquery.min.js"> </script>
+		<!------ commn-js files ----->
+		<!----- theme-style ----->
+		<link href="./html/css/style.css" rel='stylesheet' type='text/css' />
+		<!----- theme-style ----->
+		<!----- webfonts ----->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+		<!----- webfonts ----->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0);}, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	</head>
+
+	<body>
+	<!---header--->
+		<div class="header">                                                 <!--  class = "XXX"  ：XXX对应的是CSS文件里面的格式 -->
+		<!---container--->
+			<div class="container">     
+			<div class="top-header">
+				<div class="logo">
+					<a href="index.html"><img src="./html/images/logo.png"/></a>       <!-- src = "ZZZ" ：ZZZ对应的是所引用图片 -->   
+				</div>
+				<div class="menu">
+					<a class="toggleMenu" href="#"><img src="./html/images/nav-icon.png" alt="" /> </a>
+					<ul class="nav" id="nav">                                    <!--  id = "YYY" ：YYY对应的是JS文件里面响应的事件  -->
+						<li class="active"><a href="./html/index.html">主页</a></li>       
+						<li><a href="./html/model0.html" class="scroll">全国GDP变化</a></li>         <!--  href = "AAA" ：AAA对应的是网址或其他网页  -->
+						<li><a href="./html/model1.html" class="scroll">东三省GDP排名变化</a></li>
+						<li><a href="./html/model2_0.html" class="scroll">全国各省人口变化</a></li>
+						<li><a href="./html/model3.html" class="scroll">城市间人口迁徙</a></li>
+						<li><a href="./html/about.html" class="scroll">关于</a></li>
+					</ul>
+					<script type="text/javascript" src="./html/js/responsive-nav.js"></script>
+	<!-- <script type="text/javascript" src="./js/move-top.js"></script> -->
+					<script type="text/javascript" src="./html/js/easing.js"></script>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			</div>
+		<!---container--->
+		</div>
+	<!---header--->
+	
+	<!---banner--->
+
+	<!----start-slider-script---->
+		<script src="./html/js/responsiveslides.min.js"></script>            <!--  添加幻灯片js文件链接 -->
+		<script>
+		    // You can also use "$(window).load(function() {"
+		    $(function () {                                                  // JS在HTML文件中定义函数时，必须要用$( )包含起来
+		      // Slideshow 4
+		      	$('#slider4').responsiveSlides({                               // 链接上幻灯                          
+		        	auto: true,                                                  // 布尔类型：是否手动切换图片
+		        	pager: true,												 // Boolean: 是否显示页码
+		        	nav: true,                                                   // Boolean: 是否显示左右导航箭头
+		        	speed: 1500,                                                 // 切换动画持续时间，单位毫秒
+		        	timeout: 4000,                                               // 图片之间切换的时间，单位毫秒
+		        	namespace: "callbacks",                                      // String: 修改默认的容器名称，其对应CSS中一个标签
+		        	before: function () {
+		            	$('.events').append("<li>before event fired.</li>");       // Function: 回调之前的参数    append():在父级最后追加一个子元素
+		        	},
+		        	after: function () {
+		        		$('.events').append("<li>after event fired.</li>");        // Function: 回调之后的参数    
+		        	}
+		      	});
+		    });
+		  </script>
+	<!----End-slider-script---->
+
+	<!-- Slideshow 4 -->
+	    <div  id="top" class="callbacks_container">
+	      	<ul class="rslides" id="slider4">                                    <!--  添加标签 -->
+	        	<li>
+	          		<img src="./html/images/banner.jpg" alt="">
+					<div class="caption bounceInDown" data-wow-delay="0.4s">         <!--  data-wow-delay: 动画开始前延迟 -->
+	          			<div class="slide-text-info">
+	          				<h1>欢迎进入</h1>
+							<p>地理数据可视化</p>
+	          				<div class="slide-btns">
+	          					<a class="startnow" href="./html/about.html">了解更多</a>
+	          				</div>
+	          			</div>
+	          		</div>
+	        	</li>
+	        	<li>
+	          		<img src="./html/images/leaf.jpg" alt="">
+	        		<div class="caption bounceInDown" data-wow-delay="0.4s">
+	          			<div class="slide-text-info">
+	          				<h1>欢迎进入</h1>
+							<p>地理数据可视化</p>
+	          				<div class="slide-btns">
+	          					<a class="startnow" href="./html/about.html">了解更多</a>
+	          				</div>
+	          			</div>
+	          		</div>
+	        	</li>
+	        	<li>
+	          		<img src="./html/images/red.jpg" alt="">
+	          		<div class="caption bounceInDown" data-wow-delay="0.4s">
+	          			<div class="slide-text-info">
+	          				<h1>欢迎进入</h1>
+							<p>地理数据可视化</p>
+	          				<div class="slide-btns">
+	          					<a class="startnow" href="./html/about.html">了解更多</a>
+	          				</div>
+	          			</div>
+	          		</div>
+	        	</li>
+	      	</ul>
+	    </div>	         
+		<div class="clearfix"> </div>
+	<!----- End-slider---->
+		
+	<!---banner--->
+	</body>
+</html>
+		
