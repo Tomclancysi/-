@@ -23,18 +23,18 @@
     <link rel="stylesheet"href="./css/chart.css"/>
     <script src="./js/viewer.js"></script>
     <script type="text/javascript">
-    
-    function MM_callJS(jsStr) { //v2.0
-      return eval(jsStr)
-    }
+
+        function MM_callJS(jsStr) { //v2.0
+            return eval(jsStr)
+        }
     </script>
 </head>
 
 <body>
-    <!---header--->
-    <div class="header">
+<!---header--->
+<div class="header">
     <!---container--->
-        <div class="container">
+    <div class="container">
         <div class="top-header">
             <div class="logo">
                 <a href="../index.html"><img src="./images/logo.png"/></a>
@@ -51,14 +51,14 @@
             </div>
             <div class="clearfix"> </div>
         </div>
-        </div>
-    <!---container--->
     </div>
+    <!---container--->
+</div>
 <!---header--->
 
 <!-- 以下开始添加功能代码 -->
 <div id="Layer1" style="position:absolute;z-index:1 border:10px;solid #ccc;padding:10px;">
-    <div id="allmap" style="position:absolute; width:2000px; height:850px; z-index:1;  left: 1px; top: 1px;"></div>  
+    <div id="allmap" style="position:absolute; width:2000px; height:850px; z-index:1;  left: 1px; top: 1px;"></div>
     <div id="Layer2" style="position:absolute; width:200px; height:150px; z-index:1;  left: 40px; top: 1px;"onfocus="MM_callJS('hello')" >
         <div id="chartType" style="background:#FFFACD;">
             <p><br>
@@ -68,11 +68,11 @@
                 <select name="x" id="NumProvice" onchange="checked()" selected=0 style="width:100px">
                     <option value="0">辽宁</option>
                     <option value="1">吉林</option>
-                    <option value="2">黑龙江</option>            
+                    <option value="2">黑龙江</option>
                 </select>
             </p><br>
             <input type="radio" name="type" value="browser" checked="checked">   GDP排名变化<br>
-            
+
             <div id="sidebar">
                 <div id="sidebarBox">
                     <div id="sidebarScrollView">
@@ -92,7 +92,7 @@
 
 
 <script type="text/javascript">
-   //百度地图API功能
+    //百度地图API功能
     var map = new BMap.Map("allmap");
     var map = new BMap.Map("allmap",{minZoom:3,maxZoom:6}); // 创建Map实例,设置地图允许的最小/大级别
     var provice=new Array("辽宁","吉林省","黑龙江");
@@ -102,24 +102,24 @@
     map.centerAndZoom(new BMap.Point(118.780949,32.05846), 5);     // 初始地图的中心点和显示大小(瞬间)
 
     function InfoPoint(){
-    //弹跳动画+信息窗口
-        var point = new BMap.Point(lo[NumProvice.value],la[NumProvice.value]);      // 获取每个省省会坐标 
+        //弹跳动画+信息窗口
+        var point = new BMap.Point(lo[NumProvice.value],la[NumProvice.value]);      // 获取每个省省会坐标
         var marker = new BMap.Marker(point);  // 创建标注，表示地图上的点，可自定义标注的图标
         map.addOverlay(marker);               // 将标注添加到地图中
         marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画      BMAP_ANIMATION_DROP：下坠
         //纯信息窗口
         map.centerAndZoom(point, 15);           // 地图的中心点和显示大小
-        var opts = { 
-          width : 60,     // 信息窗口宽度
-          height: 30,     // 信息窗口高度
-          title : "2020年各省国民生产总值" , // 信息窗口标题
-          enableMessage:false,//不设置允许信息窗发送短息
-          message:""
+        var opts = {
+            width : 60,     // 信息窗口宽度
+            height: 30,     // 信息窗口高度
+            title : "2020年各省国民生产总值" , // 信息窗口标题
+            enableMessage:false,//不设置允许信息窗发送短息
+            message:""
         }
-        
-        var infoWindow = new BMap.InfoWindow(provice[NumProvice.value]+":"+GDP[NumProvice.value]+"亿元", opts);  // 创建信息窗口对象 
-        
-        marker.addEventListener("click", function(){          
+
+        var infoWindow = new BMap.InfoWindow(provice[NumProvice.value]+":"+GDP[NumProvice.value]+"亿元", opts);  // 创建信息窗口对象
+
+        marker.addEventListener("click", function(){
             map.openInfoWindow(infoWindow, point); //开启信息窗口
         });
     }

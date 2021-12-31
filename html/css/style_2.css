@@ -123,9 +123,9 @@ body {
 	float:left;
 	margin-left: 4%;
 }
-.grid_1_of_3:first-child { 
-	margin-left: 0; 
-} 
+.grid_1_of_3:first-child {
+	margin-left: 0;
+}
 .images_1_of_3 {
 	text-align: center;       /* 使div格子居中*/
 	/*width: 30.333%; */
@@ -237,7 +237,7 @@ body {
 	top: 100%;
 }
 .da-slideFromLeft {
-	top: 0px; 
+	top: 0px;
 	left: -100%;
 }
 .da-slideFromRight {
@@ -508,7 +508,7 @@ span.zoom{
 	border-bottom: 5px solid #FEBD17;
 }
 .client_pic ul li a{
-	display:block;	
+	display:block;
 	-webkit-transition: 0.9s;
 	-moz-transition: 0.9s;
 	-o-transition: 0.9s;
@@ -549,7 +549,7 @@ span.zoom{
 	margin: 4% 0;
 }
 .tt-wrapper{
-	padding:4% 0 10% 0;	
+	padding:4% 0 10% 0;
 }
 .tt-wrapper li:first-child{
 	margin-left: 0;
@@ -566,7 +566,7 @@ span.zoom{
 	height: 60px;
 }
 .tt-wrapper li .tt-sample{
-    background-position: 0px 0px;
+	background-position: 0px 0px;
 }
 .tt-wrapper li a span{
 	text-transform:uppercase;
@@ -576,7 +576,7 @@ span.zoom{
 	padding: 10px;
 	left: 50%;
 	margin-left: -64px;
-	font-weight: normal;	
+	font-weight: normal;
 	font-size: 14px;
 	color: #ffffff;
 	text-align: center;
@@ -636,7 +636,7 @@ span.zoom{
 }
 .products_of_3{
 	display:block;
-	margin-top: 4%;	
+	margin-top: 4%;
 }
 .product1_of_3{
 	float: left;
@@ -657,7 +657,7 @@ span.zoom{
 	transition: 0.9s;
 }
 .product1_of_3 h3:hover{
-	color: #febd17;	
+	color: #febd17;
 }
 .product1_of_3 h4{
 	font-size: 1.2em;
@@ -1045,7 +1045,7 @@ p.para{
 }
 .contact-form textarea{
 	resize:none;
-	height:120px;		
+	height:120px;
 }
 .contact-form input[type="submit"]{
 	font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;

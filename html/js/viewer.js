@@ -1,4 +1,4 @@
-﻿window.onload = initAll;     // 界面初始化
+window.onload = initAll;     // 界面初始化
 
 function checked(){
 //事件一
@@ -6,7 +6,7 @@ function checked(){
     Provice();//高亮显示行政区
     chgChart();//更改柱状图信息
 
-    
+
 }
 
 function initAll(){
@@ -32,26 +32,26 @@ function chgChart() {
             [9.3,8.0,114,53.0,36.2,52.7,38.1,53,10.0,101.4,76.8,108.0,49.1,64.3,155.9,160.7,83.4,104.2,93.0,79.0,11.9,49.4,153.6,69.4,76.4,4.6,56.4,41.7,7.5,9.4,34.9,-1]
         ]
     }
-    
-    
+
+
     var radioButtons = document.getElementsByTagName("input");
-    
-    
+
+
     var selection=document.getElementById("NumProvice");
     var num=NumProvice.value;
     var imgSrc = "images/" + num + ".jpg";
-    
+
     var string1=getButton("type");
     switch(string1){
-    case "browser":
-        var thisChart = bChart;
-        break;
-    case "platform":
-        var thisChart = jsChart;
-        break;
-    case "oldData":
-        var thisChart = oldData;
-        break;
+        case "browser":
+            var thisChart = bChart;
+            break;
+        case "platform":
+            var thisChart = jsChart;
+            break;
+        case "oldData":
+            var thisChart = oldData;
+            break;
     }
     var chartBody = "<h4>"+thisChart.name +"——" +thisChart.provice[num]+"</h4>" ;
 
@@ -74,22 +74,22 @@ function chgChart() {
         }
         return -1;
     }
-        //更改省份
-        Provice();
-        //读取省份概况    
-            try{
-                xmlDoc= new ActiveXObject("Microsoft.XMLDOM");
-            }catch(e){
-                try{
-                    xmlDoc= document.implementation.createDocument(",",null);
-                }catch(e){
-                    alert(e.message);
-                    return;
-                }
-            }
-            xmlDoc.async = false;
-            xmlDoc.load("note.xml");
-            document.getElementById("sum").value=xmlDoc.getElementsByTagName("sum")[NumProvice.value].childNodes[0].nodeValue;
+    //更改省份
+    Provice();
+    //读取省份概况
+    try{
+        xmlDoc= new ActiveXObject("Microsoft.XMLDOM");
+    }catch(e){
+        try{
+            xmlDoc= document.implementation.createDocument(",",null);
+        }catch(e){
+            alert(e.message);
+            return;
+        }
+    }
+    xmlDoc.async = false;
+    xmlDoc.load("note.xml");
+    document.getElementById("sum").value=xmlDoc.getElementsByTagName("sum")[NumProvice.value].childNodes[0].nodeValue;
 }
 
 function Provice(){
@@ -98,17 +98,17 @@ function Provice(){
     //高亮显示省份行政区划
     var bdary = new BMap.Boundary();
     //for(var i=0;i<provice.length;i++){
-        bdary.get(provice[NumProvice.value], function(rs){       //获取行政区域
-        map.clearOverlays();        //清除地图覆盖物 
-        InfoPoint();        
-            var count = rs.boundaries.length; //行政区域的点有多少个
-            for(var i = 0; i < count; i++){
-                var ply = new BMap.Polygon(rs.boundaries[i], {strokeColor:"black", strokeWeight:2, strokeOpacity:0, fillColor:color[NumProvice.value]}); //建立多边形覆盖
-                map.addOverlay(ply);  //添加覆盖物
-                //map.setViewport(ply.getPath());    //调整视野 
-                //弹出窗口  
-            }                
-        }); 
+    bdary.get(provice[NumProvice.value], function(rs){       //获取行政区域
+        map.clearOverlays();        //清除地图覆盖物
+        InfoPoint();
+        var count = rs.boundaries.length; //行政区域的点有多少个
+        for(var i = 0; i < count; i++){
+            var ply = new BMap.Polygon(rs.boundaries[i], {strokeColor:"black", strokeWeight:2, strokeOpacity:0, fillColor:color[NumProvice.value]}); //建立多边形覆盖
+            map.addOverlay(ply);  //添加覆盖物
+            //map.setViewport(ply.getPath());    //调整视野
+            //弹出窗口
+        }
+    });
 }
 
 
