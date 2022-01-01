@@ -2,10 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>两次人口普查增长（万人）</title>
+    <link href="./css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!------ commn-js files ----->
+    <script src="./js/jquery.min.js"> </script>
+    <!------ commn-js files ----->
+    <!----- theme-style ----->
+    <link href="./css/style.css" rel='stylesheet' type='text/css' />
+    <!----- theme-style ----->
+    <!----- webfonts ----->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+    <!----- webfonts ----->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"href="./css/chart.css"/>
     <script src="js/echarts.js"></script>
 </head>
 <body>
+<!---header--->
+<div class="header">
+    <!---container--->
+    <div class="container">
+        <div class="top-header">
+            <div class="logo">
+                <a href="../index.html"><img src="./images/logo.png"/></a>
+            </div>
+            <div class="menu">
+                <ul class="nav" id="nav">
+                    <li><a href="../index.html">主页</a></li>
+                    <li><a href="model0.html" class="scroll">全国GDP变化</a></li>
+                    <li><a href="model1.html" class="scroll">东三省GDP排名变化</a></li>
+                    <li><a href="model2_0.html" class="scroll">全国各省人口变化</a></li>
+                    <li class="active1"><a href="model3.html" class="scroll">东三省人口迁出</a></li>
+                    <li class="active"><a href="model4.html" class="scroll">两次人口普查增长（万人）</a></li>
+                    <li class="active1"><a href="model5.html" class="scroll">各市GDP</a></li>
+                    <li><a href="about.html" class="scroll">关于</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!---container--->
+</div>
+
 <div id="mainMap" style="height:700px;width:1000px;border:10px solid #ccc;padding:10px;"></div>
 <script type="application/javascript" defer>
     var china_json = '{"type": "FeatureCollection",\
